@@ -10,7 +10,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-
+const compression = require('compression');
 //import the routes
 
 const AppError = require('./utils/appError');
@@ -69,6 +69,8 @@ app.use(
     },
   })
 );
+
+app.use(compression());
 
 const limiter = rateLimit({
   max: 100,

@@ -16,7 +16,6 @@ module.exports = class Email {
     if (process.env.NODE_ENV === 'production') {
       console.log('PRODUCTION_MAIL_GOT HIT');
       return nodemailer.createTransport({
-        //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
         service: 'SendGrid',
         auth: {
           user: process.env.SENDGRID_USERNAME,
@@ -28,8 +27,8 @@ module.exports = class Email {
         host: 'sandbox.smtp.mailtrap.io',
         port: 2525,
         auth: {
-          user: '1f38d8cf01ac00',
-          pass: '093247b599a971',
+          user: process.env.MailTrap_User,
+          pass: process.env.MailTrap_Pass,
         },
       });
     }

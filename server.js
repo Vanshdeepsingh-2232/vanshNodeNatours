@@ -15,10 +15,7 @@ const app = require('./app');
 
 //import the express app which is in the same folder
 
-const DB =
-  'mongodb+srv://vanshdeepsingh1030:rv97wjl6xCub5EKQ@cluster0.0htttjj.mongodb.net/natours?retryWrites=true&w=majority&appName=Cluster0';
-
-// const DB = 'mongodb://localhost:27017/natours';
+const DB = process.env.MongoDB_Atlas;
 
 //mongodb+srv://vanshdeepsingh1030:<password>@cluster0.0htttjj.mongodb.net/natours?retryWrites=true&w=majority&appName=Cluster0
 
