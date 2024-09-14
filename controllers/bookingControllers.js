@@ -10,6 +10,21 @@ const AppError = require('../utils/appError');
 //handler Factory
 const factory = require('./../controllers/handlerFactory');
 
+//booking function
+const createBookingforDB = async (userId, tour, price) => {
+  try {
+    const booking = await Booking.create({
+      user: userId,
+      tour: tour,
+      price: price,
+      bookedAt: Date.now(),
+    });
+    console.log('Booking successfully created:', booking);
+  } catch (err) {
+    console.error('Error creating booking:', err);
+  }
+};
+
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   //1)get currently booked tour
   const tour = await Tour.findById(req.params.tourID);
@@ -43,7 +58,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     mode: 'payment',
   });
 
-  console.log(session.success_url);
+  // console.log(session.success_url);
 
   //3) create session as response
 
@@ -51,19 +66,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     status: 'success',
     session,
   });
-});
 
-exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-  //temp solution
-  const tour = await Tour.findById(req.params.tourID);
-  const { user, price } = req.query;
-
-  if (!tour && !user && !price) {
-    return next();
-  }
-
-  await Booking.create({ tour, user, price });
-  res.redirect(`${req.protocol}://${req.get('host')}`);
+  console.log(req);
+  await createBookingforDB(req.user._id, tour, tour.price);
 });
 
 exports.createBooking = factory.createOne(Booking);

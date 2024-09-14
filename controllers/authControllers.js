@@ -45,7 +45,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
+  //console.log(url);
   await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
 });
@@ -89,7 +89,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   //2 - Verification token
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
+  //console.log(decoded);
 
   //3 - check if the user still exists
 
@@ -147,7 +147,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   try {
     //3 Send it to users Email
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/api/v1/users/resetPassword/${resetToken}`;
     await new Email(user, resetURL).sendPasswordReset();
 
     res.status(200).json({
