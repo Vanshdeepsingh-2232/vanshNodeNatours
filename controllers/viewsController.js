@@ -2,7 +2,7 @@ const Tour = require('./../models/tourModel');
 const Bookings = require('./../models/bookingModel');
 
 const catchAsync = require('./../utils/catchAsync');
-const slugify = require('slugify');
+//const slugify = require('slugify');
 const AppError = require('./../utils/appError');
 
 exports.getOverview = catchAsync(async (req, res) => {
@@ -49,21 +49,28 @@ exports.getAccount = (req, res) => {
 };
 
 exports.getMyTours = catchAsync(async (req, res, next) => {
-  //Find all bookings
+  // Find all bookings for the user
   const bookings = await Bookings.find({ user: req.user.id });
 
-  //find tours with the returned Ids
-  const tourIds = bookings.map((el) => {
-    el.tour;
-  });
-  const tours = Tour.find({
+  // Extract the tour IDs from the bookings
+  const tourIds = bookings.map((el) => el.tour);
+
+  // Find all tours corresponding to the extracted tour IDs
+  const tours = await Tour.find({
     _id: {
       $in: tourIds,
     },
   });
 
-  res.status(200).render('overview', {
+  // Render the 'booked' template with the found tours
+  res.status(200).render('booked', {
     title: 'My Tours',
-    tours,
+    tours, // make sure to pass the awaited tours
   });
 });
+
+exports.getAboutUs = (req, res, next) => {
+  res.status(200).render('aboutus', {
+    title: 'About Us',
+  });
+};

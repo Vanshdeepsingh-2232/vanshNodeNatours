@@ -14,4 +14,6 @@ router.get('/me', authcontroller.protect, viewcontrollers.getAccount);
 
 router.get('/my-tours', authcontroller.protect, viewcontrollers.getMyTours);
 
+router.get('/aboutus', viewcontrollers.getAboutUs);
+
 module.exports = router;

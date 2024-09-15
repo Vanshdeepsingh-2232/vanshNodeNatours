@@ -1,0 +1,69 @@
+extends base
+
+block append head
+    //- Add any additional CSS or scripts if needed
+
+mixin overviewBox(label,text,icon)
+    .overview-box__detail
+        svg.overview-box__icon
+            use(xlink:href=`/img/icons.svg#icon-${icon}`)
+        span.overview-box__label= label
+        span.overview-box__text= text
+
+block content
+    section.section-header
+        .header__hero
+            .header__hero-overlay &nbsp;
+            img.header__hero-img(src='/img/about/about-hero.jpg', alt='About Us')
+
+        .heading-box
+            h1.heading-primary
+                span About Us
+            .heading-box__group
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-info')
+                    span.heading-box__text Learn more about us
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-heart')
+                    span.heading-box__text Passionate Team
+
+    section.section-description
+        .overview-box
+            div
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Our Mission
+                    +overviewBox('Empower', 'Helping people discover nature', 'earth')
+                    +overviewBox('Innovate', 'Leading in eco-tourism', 'trending-up')
+                    +overviewBox('Care', 'Fostering environmental responsibility', 'leaf')
+
+                .overview-box__group
+                    h2.heading-secondary.ma-bt-lg Meet the Team
+                    .overview-box__detail
+                        img.overview-box__img(src='/img/team/team-member-1.jpg', alt='John Doe')
+                        span.overview-box__lable CEO
+                        span.overview-box__text John Doe
+                    .overview-box__detail
+                        img.overview-box__img(src='/img/team/team-member-2.jpg', alt='Jane Smith')
+                        span.overview-box__lable COO
+                        span.overview-box__text Jane Smith
+                    .overview-box__detail
+                        img.overview-box__img(src='/img/team/team-member-3.jpg', alt='Mark Brown')
+                        span.overview-box__lable CTO
+                        span.overview-box__text Mark Brown
+
+    section.section-pictures
+        .picture-box
+            img.picture-box__img(src='/img/about/about-1.jpg', alt='About Image 1', class='picture-box__img--1')
+        .picture-box
+            img.picture-box__img(src='/img/about/about-2.jpg', alt='About Image 2', class='picture-box__img--2')
+        .picture-box
+            img.picture-box__img(src='/img/about/about-3.jpg', alt='About Image 3', class='picture-box__img--3')
+
+    section.section-cta
+        .cta
+            .cta__content
+                h2.heading-secondary Join our Journey
+                p.cta__text Discover the world with us and make a difference!
+                button.btn.btn--green.span-all-rows(href='/contact') Contact Us Now!
