@@ -52,7 +52,7 @@ exports.getOne = (Model, populateOptions) =>
     if (!DocById) {
       return next(new AppError('No Doc found from that Id'), 404);
     } else {
-      console.log(DocById);
+      //console.log(DocById);
       res.status(200).json({
         Status: 'SUCCESS',
         Data: DocById,
@@ -68,7 +68,7 @@ exports.GetAll = (Model) =>
       filter = { tour: mongoose.Types.ObjectId(req.params.tourId) };
     }
     // Log the original query for debugging
-    console.log('Original query:', req.query);
+    //console.log('Original query:', req.query);
 
     // Execute query
     const features = new ApiFeatures(Model.find(), req.query)
