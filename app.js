@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 //import the routes
@@ -42,6 +43,7 @@ app.use(mongoSanitize());
 
 //Data Sanitization against XSS
 app.use(xss());
+app.use(cors());
 
 //prevent Parameter Pollution
 app.use(
