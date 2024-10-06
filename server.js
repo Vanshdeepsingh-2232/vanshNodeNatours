@@ -35,7 +35,7 @@ mongoose.connection.on('disconnected', () => {
 });
 
 //start the server using express imported app
-app.listen(8000, () => {
+app.listen(8000, '0.0.0.0', () => {
   console.log(' APP RUNNING....');
 });
 
