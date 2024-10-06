@@ -41,11 +41,11 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
+
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  //console.log(url);
   await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
 });
@@ -261,5 +261,5 @@ exports.logout = async (req, res) => {
     httpOnly: true,
   });
 
-  res.status(200).json({ status: 'Success' });
+  res.status(200).redirect('/');
 };

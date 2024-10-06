@@ -63,9 +63,17 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      connectSrc: ["'self'", 'ws://127.0.0.1:*'],
-      scriptSrc: ["'self'", 'https://js.stripe.com'],
+      connectSrc: [
+        "'self'",
+        'ws://127.0.0.1:*',
+        'https://unpkg.com',
+        'https://api.maptiler.com',
+      ],
+      scriptSrc: ["'self'", 'https://js.stripe.com', 'https://unpkg.com'],
       frameSrc: ["'self'", 'https://js.stripe.com'],
+      styleSrc: ["'self'", 'https://unpkg.com', 'https://fonts.googleapis.com'],
+      imgSrc: ["'self'", 'data:'],
+      workerSrc: ["'self'", 'blob:'],
     },
   })
 );
